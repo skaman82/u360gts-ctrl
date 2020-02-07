@@ -13,7 +13,7 @@ U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 //U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0 | U8G_I2C_OPT_NO_ACK | U8G_I2C_OPT_FAST);  // Fast I2C / TWI
 
 #define peraypwrADDR    1       // EEPROM Adress
-#define R1              27000   // Resistor1 27k
+#define R1              20700   // Resistor1 27k
 #define R2              4700    // Resistor2 4.7k
 #define Voltagedetect   3.24    // Min. voltage for cell detection
 #define bt_ct           15      //Center Button
@@ -242,7 +242,7 @@ void setup(void) {
     u8g.setHiColorByRGB(255, 255, 255);
   }
 
-  analogReference(INTERNAL); //INTERNAL 2.56 or DEFAULT 3.3
+  analogReference(DEFAULT); //INTERNAL 2.56 or DEFAULT 3.3
 
   Serial.begin(9600);
   // while (!Serial);             // Leonardo: wait for serial monitor
@@ -985,7 +985,7 @@ void ReadVoltage(void) {
     previousMillis = updatetime;
 
     sa_update = 0; //also update smart audio status
-    voltage = vsens * (2.56 / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
+    voltage = vsens * (4.48 / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
 
     if (celldetect == 0) {
       //detect cell count
