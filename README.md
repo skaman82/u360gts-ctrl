@@ -19,12 +19,12 @@ This has the following functions:
 • Arduino Pro Micro (Leonardo) 3.3V
 https://de.aliexpress.com/item/32992577032.html
 
-• 1206 4.7k resistor
-• 1206 27k resistor
-• 1206 100nf capacitor
-• 4x 0603 10k resistor
-• IRLML6402 Mosfet (SOT23-3)
-• BC848B Transistor (SOT23-3)
+• 1206 4.7k resistor</br>
+• 1206 27k resistor</br>
+• 1206 100nf capacitor</br>
+• 4x 0603 10k resistor</br>
+• IRLML6402 Mosfet (SOT23-3)</br>
+• BC848B Transistor (SOT23-3)</br>
 
 • 5-way tact switch
 https://de.aliexpress.com/item/32860774374.html
