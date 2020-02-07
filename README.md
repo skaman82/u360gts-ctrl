@@ -37,3 +37,6 @@ https://de.aliexpress.com/item/32461198916.html
 
 • 3mm 940nm IR LEDs (receiver + transmitter) < receiver connects to GND and IR+
 https://de.aliexpress.com/item/32967272936.html
+
+
+<img src="https://raw.githubusercontent.com/skaman82/u360gts-ctrl/master/images/connections.png"/>
