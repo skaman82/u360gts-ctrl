@@ -6,7 +6,7 @@ This has the following functions:
 • Turn ON/OFF the VTX</br>
 • SmartAudio channel control (2+ Version not supported)</br>
 • Battery monitoring</br>
-• Controlls pan servo manually to allow to get to the screws ob the case</br>
+• Controlls pan servo manually to allow to get to the screws of the case</br>
 • Automatic parking mode to align the tracker again</br>
 
 
