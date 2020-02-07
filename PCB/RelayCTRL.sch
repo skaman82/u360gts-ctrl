@@ -14562,9 +14562,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="97.79" y="-41.91" size="1.778" layer="95" rot="R180"/>
 <attribute name="TP_SIGNAL_NAME" x="95.25" y="-39.37" size="1.778" layer="97" rot="R180"/>
 </instance>
-<instance part="R2" gate="G$1" x="30.48" y="20.32" smashed="yes">
-<attribute name="NAME" x="26.67" y="21.8186" size="1.778" layer="95"/>
-<attribute name="VALUE" x="26.67" y="17.018" size="1.778" layer="96"/>
+<instance part="R2" gate="G$1" x="22.86" y="25.4" smashed="yes" rot="R90">
+<attribute name="NAME" x="21.3614" y="21.59" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="26.162" y="21.59" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="R6" gate="G$1" x="22.86" y="15.24" smashed="yes" rot="R90">
 <attribute name="NAME" x="21.3614" y="11.43" size="1.778" layer="95" rot="R90"/>
@@ -14683,6 +14683,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="5V" gate="G$1" pin="TP"/>
 <wire x1="88.9" y1="-38.1" x2="88.9" y2="-33.02" width="0.1524" layer="91"/>
 <label x="88.9" y="-33.02" size="1.778" layer="95" rot="R90" xref="yes"/>
+</segment>
+<segment>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="22.86" y1="30.48" x2="22.86" y2="33.02" width="0.1524" layer="91"/>
+<label x="22.86" y="33.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -14947,13 +14952,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="48.26" y="22.86" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="B1" gate="G$1" pin="*6"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="55.88" y1="20.32" x2="35.56" y2="20.32" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="3V" class="0">
 <segment>
 <pinref part="B1" gate="G$1" pin="VCC"/>
@@ -14964,11 +14962,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <net name="IR" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="25.4" y1="20.32" x2="22.86" y2="20.32" width="0.1524" layer="91"/>
 <label x="17.78" y="20.32" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="R6" gate="G$1" pin="2"/>
 <wire x1="22.86" y1="20.32" x2="17.78" y2="20.32" width="0.1524" layer="91"/>
 <junction x="22.86" y="20.32"/>
+<pinref part="B1" gate="G$1" pin="*6"/>
+<wire x1="22.86" y1="20.32" x2="55.88" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IR+" gate="G$1" pin="TP"/>
