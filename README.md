@@ -23,8 +23,9 @@ https://de.aliexpress.com/item/32992577032.html
 • 1206 27k resistor (R1)</br>
 • 1206 100nf capacitor (C3)</br>
 • 4x 0603 10k resistor (R2, R4, R5, R6)</br>
+• 0603 1k resistor (R7)</br>
 • IRLML6402 Mosfet (SOT23-3)</br>
-• BC848B Transistor (SOT23-3) (Q2)</br>
+• 2x BC848B Transistor (SOT23-3) (Q1, Q2)</br>
 
 • 5-way tact switch
 https://de.aliexpress.com/item/32860774374.html
