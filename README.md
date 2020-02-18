@@ -36,7 +36,8 @@ https://de.aliexpress.com/item/32965469301.html
 • CD4066BM switch (SOP14 IC)
 https://de.aliexpress.com/item/32461198916.html
 
-• 3mm 940nm IR LEDs (receiver + transmitter) < receiver connects to GND and IR+
+• 3mm 940nm IR LEDs (receiver + transmitter) < 
+receiver connects to GND and IR+ on the PCB; transmitter connects to 5v (through 100R resistor) and GND in the top box
 https://de.aliexpress.com/item/32967272936.html
 
 
