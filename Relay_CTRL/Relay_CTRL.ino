@@ -12,13 +12,16 @@ Servo myservo;  // create servo object to control a servo D9
 U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 //U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0 | U8G_I2C_OPT_NO_ACK | U8G_I2C_OPT_FAST);  // Fast I2C / TWI
 
+#define idle_servo_value  1500  //center value for the pan servo in us
 #define peraypwrADDR    1       // EEPROM Adress
-#define R1              20700   // Resistor1 27k
+#define R1              27000   // Resistor1 27k
 #define R2              4700    // Resistor2 4.7k
-#define Voltagedetect   3.24    // Min. voltage for cell detection
+#define Voltagedetect   3.5    // Min. voltage for cell detection
 #define bt_ct           15      //Center Button
 #define bt_le           14      //Left Button
 #define bt_ri           16      //Right Button
+#define bt_up           21      //Up Button
+#define bt_down         20      //Down Button
 #define vbat_pin        A0      //vsens pin
 #define ir_pin          A7      //IR receiver pin
 #define pwm_contr1      8       //4066 c1 
@@ -26,6 +29,7 @@ U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 #define pwm_pin         10      //Servo signal pin
 #define ctrl_pin        7       //Mosfet controll - VTX power control
 #define BZ_pin          5       //Optional Buzzer
+
 
 int act_freq;
 byte act_band = 0;
@@ -255,21 +259,20 @@ void setup(void) {
   pinMode(bt_ri, INPUT_PULLUP); //BT right
   pinMode(bt_ct, INPUT_PULLUP); //BT center
   pinMode(bt_le, INPUT_PULLUP); //BT left
+  pinMode(bt_up, INPUT_PULLUP); //BT up
+  pinMode(bt_down, INPUT_PULLUP); //BT down
   pinMode(ctrl_pin, OUTPUT); //VTX SW
   pinMode(vbat_pin, INPUT); //VSENS A0
   pinMode(ir_pin, INPUT); //IR INPUT (D6)
   pinMode(pwm_contr1, OUTPUT); //CONTROL A 4066
   pinMode(pwm_contr2, OUTPUT); //CONTROL B 4066
-  //pinMode(BZ_pin, OUTPUT); //VTX SW
+  pinMode(BZ_pin, OUTPUT); //BZ- PAD
 
 
   pinMode(17, OUTPUT); //BULDIN LED RX
   pinMode(30, OUTPUT); //BULDIN LED TX
   digitalWrite(17, LOW);
-
-  // turn ON SIG A (FC PAN) and SIG B (SW PWM) OFF for PAN PWM on 4066
-  digitalWrite(pwm_contr1, HIGH);
-  digitalWrite(pwm_contr2, LOW);
+  digitalWrite(30, LOW);
 
   myservo.attach(pwm_pin); //SW SERVO OUTPUT
 
@@ -289,35 +292,43 @@ byte buttoncheck()
 {
   int i_butt = 0;
   byte buttonz = 0;
-  if (digitalRead(bt_ri) != 1)
-  {
+  if (digitalRead(bt_ri) != 1) {
     while (digitalRead(bt_ri) != 1)
     {
       delay(2);
       i_butt++;
     }
-    buttonz = 1;
+    buttonz = 1; //Right pressed
   }
 
-  else if (digitalRead(bt_ct) != 1)
-  {
-    while (digitalRead(bt_ct) != 1)
-    {
+  else if (digitalRead(bt_ct) != 1) {
+    while (digitalRead(bt_ct) != 1) {
       delay(2);
       i_butt++;
     }
-    buttonz = 2;
+    buttonz = 2; //Center pressed
   }
-  else if (digitalRead(bt_le) != 1)
-  {
-    while (digitalRead(bt_le) != 1)
-    {
+  else if (digitalRead(bt_le) != 1) {
+    while (digitalRead(bt_le) != 1) {
       delay(2);
       i_butt++;
     }
-    buttonz = 3;
+    buttonz = 3; //Left pressed
   }
-
+  else if (digitalRead(bt_up) != 1) {
+    while (digitalRead(bt_up) != 1) {
+      delay(2);
+      i_butt++;
+    }
+    buttonz = 4; //Up pressed
+  }
+  else if (digitalRead(bt_down) != 1) {
+    while (digitalRead(bt_down) != 1) {
+      delay(2);
+      i_butt++;
+    }
+    buttonz = 5; //Down pressed
+  }  
   pressedbut = buttonz;
   return buttonz;
 }
@@ -488,7 +499,6 @@ void loop(void) {
 
 
 
-
 void menu() {
   menuactive = 1;
   byte exit = 0;
@@ -500,7 +510,7 @@ void menu() {
     u8g.firstPage();
     do {
       buttoncheck();
-      u8g.drawFrame (0, 0, 128, 32);
+      //u8g.drawFrame (0, 0, 128, 32);
 
       if (menuactive == 1) {
         u8g.setFont(u8g_font_6x10r);
@@ -932,7 +942,7 @@ void vtx_screen(void) {
         cur_pos = 2;
       }
 
-      u8g.drawFrame (0, 0, 128, 32);
+      //u8g.drawFrame (0, 0, 128, 32);
 
       if (cur_pos == 2) {
         if (pressedbut == 2) {
@@ -985,7 +995,7 @@ void ReadVoltage(void) {
     previousMillis = updatetime;
 
     sa_update = 0; //also update smart audio status
-    voltage = vsens * (4.48 / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
+    voltage = vsens * (3.73 / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
 
     if (celldetect == 0) {
       //detect cell count
@@ -1333,15 +1343,15 @@ void parking_ctrl(void) {
   if (parking_step == 0) {
     // turn ON SIG_A (FC PAN) and SIG_B (SW PWM) OFF for PAN PWM on 4066
     digitalWrite(17, HIGH); // just for testing
-    digitalWrite(pwm_contr2, HIGH);
     digitalWrite(pwm_contr1, LOW);
-    myservo.writeMicroseconds(1500);
+    digitalWrite(pwm_contr2, HIGH);
+    myservo.writeMicroseconds(idle_servo_value);
   }
 
   else if (parking_step == 1) {
     // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
-    digitalWrite(pwm_contr2, LOW);
     digitalWrite(pwm_contr1, HIGH);
+    digitalWrite(pwm_contr2, LOW);
     digitalWrite(17, LOW); // just for testing
 
     ir_value = analogRead(ir_pin); //D6
@@ -1351,7 +1361,7 @@ void parking_ctrl(void) {
       myservo.writeMicroseconds(1600);
     }
     else {
-      myservo.writeMicroseconds(1500);
+      myservo.writeMicroseconds(idle_servo_value);
       parking_step = 2; //halt the rotation of the 360 servo
     }
 
