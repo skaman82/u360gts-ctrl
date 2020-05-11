@@ -7,7 +7,7 @@ u360gts Extension for the Mini-Case
 This has the following functions:
 
 • Turn ON/OFF the VTX</br>
-• SmartAudio channel control (2+ Version not supported)</br>
+• SmartAudio channel control (SA 2+ Version not supported also not SA2 LITE)</br>
 • Battery monitoring</br>
 • Controlls pan servo manually to allow to get to the screws of the case</br>
 • Automatic parking mode to align the tracker again</br>
