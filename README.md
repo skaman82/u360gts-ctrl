@@ -18,6 +18,7 @@ This has the following functions:
 
 • Arduino Pro Micro (Leonardo) 3.3V
 https://de.aliexpress.com/item/32992577032.html
+If you have a 5V version, just replace the VREG on the board with this one: MIC5205-3.3YM5-TR
 
 • 1206 4.7k resistor (R3)</br>
 • 1206 27k resistor (R1)</br>
