@@ -41,4 +41,15 @@ receiver connects to GND and IR+ on the PCB; transmitter connects to 5v (through
 https://de.aliexpress.com/item/32967272936.html
 
 
+UPDATE 11. May 2020
+Just spotted a bug on the PCB regarding the IR diode. I just corrected it in the new board file.
+If you have the old version of the board, here is a workaround:
+
+• Remove R2 (don't throw it away)
+• bridge the two pads where R2 was sitting
+• solder the R2 to the outer side of the R6
+• connect 5V (BZ+) to the outer side of R2
+• Connect the IR LED (cathode on IR+, anode on IR-)
+
+
 <img src="https://raw.githubusercontent.com/skaman82/u360gts-ctrl/master/images/connections.png"/>
