@@ -10,13 +10,21 @@
 Servo myservo;  // create servo object to control a servo D9
 
 U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
-//U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_DEV_0 | U8G_I2C_OPT_NO_ACK | U8G_I2C_OPT_FAST);  // Fast I2C / TWI
 
-#define idle_servo_value  1500  //center value for the pan servo in us
+
+
+// USER SETTINGS START >>
+
+#define Voltagedetect   3.5    // Min. voltage for cell detection 
+#define voltage_scale   3.70 //Play with this number to adjust voltage scale
+#define idle_servo      1500  //center value for the pan servo in us
+#define ir_stop_value   41 //value limit of the IR sensor for parking
+
+// >> USER SETTINGS END 
+
 #define peraypwrADDR    1       // EEPROM Adress
 #define R1              27000   // Resistor1 27k
 #define R2              4700    // Resistor2 4.7k
-#define Voltagedetect   3.5    // Min. voltage for cell detection
 #define bt_ct           15      //Center Button
 #define bt_le           14      //Left Button
 #define bt_ri           16      //Right Button
@@ -184,11 +192,11 @@ static void sa_rx_packet(uint8_t *buff, uint8_t len) {
       uint8_t crc = buff[i + 3 + len];
 
       if (crcCalc == crc) {
-        Serial.println("CRC match");
+        //Serial.println("CRC match");
         switch (buff[packetStart]) {
           case SA_GET_SETTINGS: //fall-through
           case SA_GET_SETTINGS_V2:
-            Serial.println("SA_GET_SETTINGS");
+            //Serial.println("SA_GET_SETTINGS");
             unify.vtx_version = (buff[packetStart] == SA_GET_SETTINGS) ? SA_V1 : SA_V2;
             packetStart += 2; //skip cmd and length
             unify.channel = buff[packetStart++];
@@ -197,17 +205,17 @@ static void sa_rx_packet(uint8_t *buff, uint8_t len) {
             unify.frequency = ((uint16_t)buff[packetStart++] << 8) | buff[packetStart++];
             break;
           case SA_SET_POWER:
-            Serial.println("SA_SET_POWER");
+            //Serial.println("SA_SET_POWER");
             packetStart += 2;
             unify.powerLevel = buff[packetStart++];
             break;
           case SA_SET_CHANNEL:
-            Serial.println("SA_SET_CHANNEL");
+            //Serial.println("SA_SET_CHANNEL");
             packetStart += 2;
             unify.channel = buff[packetStart++];
             break;
           case SA_SET_FREQUENCY:
-            Serial.println("SA_SET_FREQUENCY");
+            //Serial.println("SA_SET_FREQUENCY");
             //TBD: Pit mode Freq
             packetStart += 2;
             unify.frequency = ((uint16_t)buff[packetStart++] << 8) | buff[packetStart++];
@@ -219,7 +227,7 @@ static void sa_rx_packet(uint8_t *buff, uint8_t len) {
         return;
 
       } else {
-        Serial.println("CRC mismatch");
+        //Serial.println("CRC mismatch");
         return;
       }
     }
@@ -249,7 +257,7 @@ void setup(void) {
   analogReference(DEFAULT); //INTERNAL 2.56 or DEFAULT 3.3
 
   Serial.begin(9600);
-  // while (!Serial);             // Leonardo: wait for serial monitor
+  //while (!Serial);             // Leonardo: wait for serial monitor
   //Serial.println("SerialReady");
 
   Serial1.begin(4900, SERIAL_8N2);
@@ -263,14 +271,13 @@ void setup(void) {
   pinMode(bt_down, INPUT_PULLUP); //BT down
   pinMode(ctrl_pin, OUTPUT); //VTX SW
   pinMode(vbat_pin, INPUT); //VSENS A0
-  pinMode(ir_pin, INPUT); //IR INPUT (D6)
+  pinMode(ir_pin, INPUT); //IR INPUT (D6/A7)
   pinMode(pwm_contr1, OUTPUT); //CONTROL A 4066
   pinMode(pwm_contr2, OUTPUT); //CONTROL B 4066
   pinMode(BZ_pin, OUTPUT); //BZ- PAD
 
 
   pinMode(17, OUTPUT); //BULDIN LED RX
-  pinMode(30, OUTPUT); //BULDIN LED TX
   digitalWrite(17, LOW);
   digitalWrite(30, LOW);
 
@@ -830,7 +837,7 @@ void manctrl_screen(void) {
         myservo.writeMicroseconds(1400);
       }
       else {
-        myservo.writeMicroseconds(1500);
+        myservo.writeMicroseconds(idle_servo);
       }
 
       if (digitalRead(bt_ct) != 1) {
@@ -995,7 +1002,7 @@ void ReadVoltage(void) {
     previousMillis = updatetime;
 
     sa_update = 0; //also update smart audio status
-    voltage = vsens * (3.73 / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
+    voltage = vsens * (voltage_scale / 1023.0) * ((R1 + R2) / R2); // Convert the analog reading (which goes from 0 - 1023) to a voltage, considering the voltage divider:
 
     if (celldetect == 0) {
       //detect cell count
@@ -1017,6 +1024,7 @@ void ReadVoltage(void) {
     }
 
     cellvoltage = voltage / celldetect;
+    //Serial.print(cellvoltage);
 
   }
 }
@@ -1123,7 +1131,7 @@ void SAcontrol(void) {
     Serial1.begin(4900, SERIAL_8N2);
 
     UCSR1B &= ~(1 << TXEN1); //deactivate tx --> rx mode listening for response
-    delay(100);
+    delay(10);
 
     while (Serial1.available()) {
       buff[rx_len] = Serial1.read();
@@ -1345,7 +1353,7 @@ void parking_ctrl(void) {
     digitalWrite(17, HIGH); // just for testing
     digitalWrite(pwm_contr1, LOW);
     digitalWrite(pwm_contr2, HIGH);
-    myservo.writeMicroseconds(idle_servo_value);
+    myservo.writeMicroseconds(idle_servo);
   }
 
   else if (parking_step == 1) {
@@ -1354,14 +1362,15 @@ void parking_ctrl(void) {
     digitalWrite(pwm_contr2, LOW);
     digitalWrite(17, LOW); // just for testing
 
-    ir_value = analogRead(ir_pin); //D6
+    ir_value = analogRead(ir_pin); //D6/A7
+    //Serial.println(ir_value);
     //delay(10);
 
-    if (ir_value > 41) {
+    if (ir_value > ir_stop_value) {
       myservo.writeMicroseconds(1600);
     }
     else {
-      myservo.writeMicroseconds(idle_servo_value);
+      myservo.writeMicroseconds(idle_servo);
       parking_step = 2; //halt the rotation of the 360 servo
     }
 
