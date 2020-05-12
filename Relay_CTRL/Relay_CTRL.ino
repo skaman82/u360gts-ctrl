@@ -277,10 +277,6 @@ void setup(void) {
   pinMode(BZ_pin, OUTPUT); //BZ- PAD
 
 
-  pinMode(17, OUTPUT); //BULDIN LED RX
-  digitalWrite(17, LOW);
-  digitalWrite(30, LOW);
-
   myservo.attach(pwm_pin); //SW SERVO OUTPUT
 
   relaypower = EEPROM.read(peraypwrADDR);
@@ -435,10 +431,10 @@ void loop(void) {
       //ALARM INDICATOR FUNCTION
 
       if (alarmstate == 0) {
-        digitalWrite(30, HIGH);
+        //digitalWrite(30, HIGH);
       }
       else if (alarmstate == 1) {
-        digitalWrite(30, LOW);
+        //digitalWrite(30, LOW);
         u8g.drawBox (60, 10, 6, 15);
       }
 
@@ -815,7 +811,7 @@ void manctrl_screen(void) {
       // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
       digitalWrite(pwm_contr2, LOW);
       digitalWrite(pwm_contr1, HIGH);
-      digitalWrite(17, LOW); // just for testing
+      //digitalWrite(17, LOW); // just for testing
 
       u8g.setFont(u8g_font_6x10);
       u8g.setPrintPos(8, 20);
@@ -843,7 +839,7 @@ void manctrl_screen(void) {
       if (digitalRead(bt_ct) != 1) {
         digitalWrite(pwm_contr2, HIGH);
         digitalWrite(pwm_contr1, LOW);
-        digitalWrite(17, HIGH); // just for testing
+        //digitalWrite(17, HIGH); // just for testing
 
         menuactive = 5;
 
@@ -1350,7 +1346,7 @@ void parking_ctrl(void) {
 
   if (parking_step == 0) {
     // turn ON SIG_A (FC PAN) and SIG_B (SW PWM) OFF for PAN PWM on 4066
-    digitalWrite(17, HIGH); // just for testing
+    //digitalWrite(17, HIGH); // just for testing
     digitalWrite(pwm_contr1, LOW);
     digitalWrite(pwm_contr2, HIGH);
     myservo.writeMicroseconds(idle_servo);
@@ -1360,7 +1356,7 @@ void parking_ctrl(void) {
     // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
     digitalWrite(pwm_contr1, HIGH);
     digitalWrite(pwm_contr2, LOW);
-    digitalWrite(17, LOW); // just for testing
+    //digitalWrite(17, LOW); // just for testing
 
     ir_value = analogRead(ir_pin); //D6/A7
     //Serial.println(ir_value);
