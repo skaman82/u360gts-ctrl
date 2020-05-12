@@ -12,7 +12,6 @@ Servo myservo;  // create servo object to control a servo D9
 U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 
 
-
 // USER SETTINGS START >>
 
 #define Voltagedetect   3.5    // Min. voltage for cell detection 
@@ -21,6 +20,7 @@ U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 #define ir_stop_value   41 //value limit of the IR sensor for parking
 
 // >> USER SETTINGS END 
+
 
 #define peraypwrADDR    1       // EEPROM Adress
 #define R1              27000   // Resistor1 27k
@@ -37,7 +37,8 @@ U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 #define pwm_pin         10      //Servo signal pin
 #define ctrl_pin        7       //Mosfet controll - VTX power control
 #define BZ_pin          5       //Optional Buzzer
-
+#define RXLED           17      // The RX LED has a defined Arduino pin
+#define TXLED           30      // The TX LED has a defined Arduino pin
 
 int act_freq;
 byte act_band = 0;
@@ -66,7 +67,6 @@ uint8_t buff[25];
 uint8_t rx_len = 0;
 uint8_t zeroes = 0;
 int incomingByte = 0;
-
 
 #define SA_GET_SETTINGS 0x01
 #define SA_GET_SETTINGS_V2 0x09
@@ -257,12 +257,11 @@ void setup(void) {
   analogReference(DEFAULT); //INTERNAL 2.56 or DEFAULT 3.3
 
   Serial.begin(9600);
-  //while (!Serial);             // Leonardo: wait for serial monitor
+  //while (!Serial);  // Leonardo: wait for serial monitor
   //Serial.println("SerialReady");
 
   Serial1.begin(4900, SERIAL_8N2);
   UCSR1B &= ~(1 << TXEN1);
-
 
   pinMode(bt_ri, INPUT_PULLUP); //BT right
   pinMode(bt_ct, INPUT_PULLUP); //BT center
@@ -276,6 +275,8 @@ void setup(void) {
   pinMode(pwm_contr2, OUTPUT); //CONTROL B 4066
   pinMode(BZ_pin, OUTPUT); //BZ- PAD
 
+  //pinMode(RXLED, OUTPUT); 
+  //pinMode(TXLED, OUTPUT); 
 
   myservo.attach(pwm_pin); //SW SERVO OUTPUT
 
@@ -363,11 +364,6 @@ void loop(void) {
     relay_ctrl();
     parking_ctrl();
 
-    //u8g.drawFrame (0, 0, 128, 32);
-
-
-
-
     u8g.setFont(u8g_font_helvB12r);
 
     if (celldetect == 0) {
@@ -411,7 +407,6 @@ void loop(void) {
       }
       else if (cellvoltage < 3.33) {
 
-
         unsigned long buzzertime = millis();
         if (buzzertime - buzzermillis > 1000) { // one second loop
           buzzermillis = buzzertime;
@@ -431,10 +426,10 @@ void loop(void) {
       //ALARM INDICATOR FUNCTION
 
       if (alarmstate == 0) {
-        //digitalWrite(30, HIGH);
+        //digitalWrite(TXLED, HIGH);
       }
       else if (alarmstate == 1) {
-        //digitalWrite(30, LOW);
+        //digitalWrite(TXLED, LOW);
         u8g.drawBox (60, 10, 6, 15);
       }
 
@@ -513,7 +508,6 @@ void menu() {
     u8g.firstPage();
     do {
       buttoncheck();
-      //u8g.drawFrame (0, 0, 128, 32);
 
       if (menuactive == 1) {
         u8g.setFont(u8g_font_6x10r);
@@ -811,7 +805,7 @@ void manctrl_screen(void) {
       // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
       digitalWrite(pwm_contr2, LOW);
       digitalWrite(pwm_contr1, HIGH);
-      //digitalWrite(17, LOW); // just for testing
+      //digitalWrite(RXLED, LOW); // just for testing
 
       u8g.setFont(u8g_font_6x10);
       u8g.setPrintPos(8, 20);
@@ -839,13 +833,12 @@ void manctrl_screen(void) {
       if (digitalRead(bt_ct) != 1) {
         digitalWrite(pwm_contr2, HIGH);
         digitalWrite(pwm_contr1, LOW);
-        //digitalWrite(17, HIGH); // just for testing
+        //digitalWrite(RXLED, HIGH); // just for testing
 
         menuactive = 5;
 
         return;
       }
-
 
 
 
@@ -1346,7 +1339,7 @@ void parking_ctrl(void) {
 
   if (parking_step == 0) {
     // turn ON SIG_A (FC PAN) and SIG_B (SW PWM) OFF for PAN PWM on 4066
-    //digitalWrite(17, HIGH); // just for testing
+    //digitalWrite(RXLED, HIGH); // just for testing
     digitalWrite(pwm_contr1, LOW);
     digitalWrite(pwm_contr2, HIGH);
     myservo.writeMicroseconds(idle_servo);
@@ -1356,7 +1349,7 @@ void parking_ctrl(void) {
     // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
     digitalWrite(pwm_contr1, HIGH);
     digitalWrite(pwm_contr2, LOW);
-    //digitalWrite(17, LOW); // just for testing
+    //digitalWrite(RXLED, LOW); // just for testing
 
     ir_value = analogRead(ir_pin); //D6/A7
     //Serial.println(ir_value);
