@@ -1,5 +1,7 @@
 // Created by Albert Kravcov
 // SmartAudio code is adapted from Lukas Blocher https://github.com/NightHawk32/SmartAudio-testing
+// Target: Sparkfun Pro Micro, 3.3V, 8MHz
+//https://raw.githubusercontent.com/sparkfun/Arduino_Boards/master/IDE_Board_Manager/package_sparkfun_index.json
 
 #include <HardwareSerial.h>
 #include <EEPROM.h>
