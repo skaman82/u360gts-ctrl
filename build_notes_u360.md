@@ -85,7 +85,7 @@ For TBS Unify Pro Nano, which uses SmartAudio Lite, connect a 10K resistor betwe
 
 The 4066 switch on CTRL PCB with the edge DOWN, when the PCB shows upwards description.
 
-**Important:** The CTRL will provide VCC to the VTX. Use a mini-BEC if a 5V VTX is planned (i.e. Pololu D24V3F)5 .
+**Important:** The CTRL will provide VCC to the VTX on the SW (switched) pad. Use a mini-BEC if a 5V VTX is planned (i.e. Pololu D24V3F)5 .
 
 
 
