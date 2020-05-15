@@ -117,7 +117,14 @@ Both versions will blink every 2 second if AT mode is active
 
 #### Hardware
 
-For PCBs prior 05/2020 you need to solder the IR emitter with reverse polarization. The boards also require a little hack to correct a routing mistake:
+For PCBs prior 05/2020 you need to solder the IR emitter with reverse polarization. The boards also require a little hack to correct a routing mistake:<br><br>
+
+• Remove R2 (don't throw it away)<br>
+• bridge the two pads where R2 was sitting<br>
+• solder the R2 to the outer side of the R6<br>
+• connect 5V (BZ+) to the outer side of R2<br>
+• Connect the IR LED (cathode on IR+, anode on IR-)<br>
+
 ![OLED to slipring](images/IR_hack.jpg)
 
 Use two or three layer of electrical tape between Arduino Pro Micro and the PCB and remove the plastic spacers on the pin headers to ensure clearance to the gear section.
