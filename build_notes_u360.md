@@ -4,7 +4,7 @@
 
 #### printing
 
-All parts are designed to be printed without supports.
+All parts are designed to be printed without supports (only supports touching build plate on some parts).
 
 If your parts suffer from an elephant foot, decrease first layer flow, temperature, horizontal expansion and/or walls. Gear parts might not fit!
 
