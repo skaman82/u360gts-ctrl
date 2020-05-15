@@ -213,7 +213,7 @@ Both versions will blink every 2 second if AT mode is active
 === 
 
 __AT Commands for HM10 BLE Module connecting to Horus BLE Module__
-(Version: HMSoft V533) 
+(Version: HMSoft V533)
 You can check you version with AT+VERR? or AT+VERS?
 
 Taranis side:
@@ -227,12 +227,12 @@ rate matches the factory settings of the module.
 Type AT and you should get an "OK" back if everything is working
 
 * Make sure the password is 000000
-AT+ PASS000000
+	AT+ PASS000000
 * Set the module to Central Role
-AT+ROLE1
+	AT+ROLE1
 * Set the baud rate to 115200 
-AT+BAUD4
+	AT+BAUD4
 * Link the module to your radio by using the local address
-AT+CON4C249837C8F4 (replace numbers with your Mac address)
+	AT+CON4C249837C8F4 (replace numbers with your Mac address)
 
 === 
