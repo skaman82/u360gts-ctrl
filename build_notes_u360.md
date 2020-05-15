@@ -226,13 +226,13 @@ Open Arduino serial terminal, make sure you baud
 rate matches the factory settings of the module.
 Type AT and you should get an "OK" back if everything is working
 
-* Make sure the password is 000000
+	* Make sure the password is 000000
 	AT+ PASS000000
-* Set the module to Central Role
+	* Set the module to Central Role
 	AT+ROLE1
-* Set the baud rate to 115200 
+	* Set the baud rate to 115200
 	AT+BAUD4
-* Link the module to your radio by using the local address
+	* Link the module to your radio by using the local address
 	AT+CON4C249837C8F4 (replace numbers with your Mac address)
 
 === 
