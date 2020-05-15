@@ -1,6 +1,6 @@
 // Created by Albert Kravcov
 // SmartAudio code is adapted from Lukas Blocher https://github.com/NightHawk32/SmartAudio-testing
-// Target: Sparkfun Pro Micro, 3.3V, 8MHz
+// Target: Sparkfun Pro Micro, 3.3V, 8MHz (if you have the switchable version then select 5V, 16MHz even it is set to 3V!)
 //https://raw.githubusercontent.com/sparkfun/Arduino_Boards/master/IDE_Board_Manager/package_sparkfun_index.json
 
 #include <HardwareSerial.h>
@@ -1348,14 +1348,13 @@ void parking_ctrl(void) {
   }
 
   else if (parking_step == 1) {
-    // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ONF for PAN PWM on 4066
+    // turn OFF SIG_A (FC PAN) and SIG_B (SW PWM) ON for PAN PWM on 4066
     digitalWrite(pwm_contr1, HIGH);
     digitalWrite(pwm_contr2, LOW);
     //digitalWrite(RXLED, LOW); // just for testing
 
     ir_value = analogRead(ir_pin); //D6/A7
     //Serial.println(ir_value);
-    //delay(10);
 
     if (ir_value > ir_stop_value) {
       myservo.writeMicroseconds(1600);
