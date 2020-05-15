@@ -218,7 +218,7 @@ You can check you version with AT+VERR? or AT+VERS?
 
 Taranis side:
 * Go to hardware menu and enable Bluetooth Telemetry
-* Note the Local address of the BT module 
+* Note the Local address of the BT module shown on your radio screen 
 
 HM10 Side:
 Connect your BT module to an FTDI USB adapter.
@@ -233,6 +233,6 @@ Type AT and you should get an "OK" back if everything is working
 	* Set the baud rate to 115200
 	AT+BAUD4
 	* Link the module to your radio by using the local address
-	AT+CON4C249837C8F4 (replace numbers with your Mac address)
+	AT+CON4C249837C8F4 (replace numbers with your MAC address)
 
 === 
