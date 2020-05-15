@@ -155,7 +155,7 @@ Connect a battery on your plane and wait until Sats are found.
 You should receive coordinates of the plane in the tracker now.
 
 ===
-#### Bluetooth setup
+### Bluetooth setup
 
 
 Connect your BT module to an FTDI USB adapter.
