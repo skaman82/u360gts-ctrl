@@ -166,7 +166,7 @@ Type AT and you should get an "OK" back if everything is working
 The BT module might behave differently based on revision and firmware.
 
 
-Here is an example of binding a HC-05 FW 3.0 with a HC-05 FW 4.0.
+*Here is an example of binding a HC-05 FW 3.0 with a HC-05 FW 4.0.*
 
 Both versions will blink every 2 second if AT mode is active
 
@@ -212,7 +212,7 @@ Both versions will blink every 2 second if AT mode is active
 
 === 
 
-AT Commands for HM10 BLE Module connecting to Horus BLE Module
+*AT Commands for HM10 BLE Module connecting to Horus BLE Module*
 (Version: HMSoft V533) 
 You can check you version with AT+VERR? or AT+VERS?
 
