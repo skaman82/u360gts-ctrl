@@ -63,55 +63,7 @@ Solder the wires of the OLED PCB to the slipring directing to the top of the PCB
 ![wiring head](images/HEAD.png)
 ![wiring body](images/BODY.png)
 
-#### Bluetooth setup
 
-HC-05 might behave differently based on revision and firmware.
-
-Here is an example of binding a HC-05 FW 3.0 with a HC-05 FW 4.0.
-
-Both versions will blink every 2 second if AT mode is active
-
-
-###### Master (Radio) FW3.0
-	to enter AT mode no need to push the button, just connect EN and pull high from code
-	PIN needs to be "quoted"
-	request commands like AT+VERSION
-	
-	VERSION:3.0-20170601
-	+NAME:X9D
-	+UART:115200,0,0
-	+ROLE:1
-	+CMODE:1
-	+PIN:"1234"
-	+ADDR:9999:88:F97D84
-	+BIND:11:22:917BF
-
-###### Slave (Tracker) FW4.0
-	to enter AT mode I had to push the button when powering on
-	no quotes around PIN
-	request commands needed to end with ? like AT+VERSION?
-
-	+VERSION:4.0-20190815
-	+NAME:U360
-	+UART:115200,0,0
-	+ROLE:0
-	+CMODE:0
-	+PSWD:1234
-	+ADDR:11:22:0917BF
-	+BIND:9999:88:F97D84
-
-###### validation commands:
-
-	AT+VERSION?
-	AT+NAME?
-	AT+UART?
-	AT+ROLE?
-	AT+CMODE?
-	AT+PSWD?
-	AT+ADDR?
-	AT+BIND?
-
-=== 
 
 ### u360gts Controller
 
@@ -175,10 +127,11 @@ Incase you flashed with the wrong target, and your tty/cu/COM device disappeared
 	
 
 ===
+
+
 ===
-===
-===
-===
+
+
 
 ### Telemetry test procedure
 ##### simple Telmetry test (CROSSFIRE/X9D)
@@ -200,3 +153,86 @@ Set the OpenTX Serial Port to "Telem Mirror" in the Hardware page of your radio 
 Connect a battery on your plane and wait until Sats are found. 
 
 You should receive coordinates of the plane in the tracker now.
+
+===
+#### Bluetooth setup
+
+
+Connect your BT module to an FTDI USB adapter.
+Open Arduino serial terminal, make sure you baud 
+rate matches the factory settings of the module.
+Type AT and you should get an "OK" back if everything is working
+
+The BT module might behave differently based on revision and firmware.
+
+
+Here is an example of binding a HC-05 FW 3.0 with a HC-05 FW 4.0.
+
+Both versions will blink every 2 second if AT mode is active
+
+
+###### Master (Radio) FW3.0
+	to enter AT mode no need to push the button, just connect EN and pull high from code
+	PIN needs to be "quoted"
+	request commands like AT+VERSION
+	
+	VERSION:3.0-20170601
+	+NAME:X9D
+	+UART:115200,0,0
+	+ROLE:1
+	+CMODE:1
+	+PIN:"1234"
+	+ADDR:9999:88:F97D84
+	+BIND:11:22:917BF
+
+###### Slave (Tracker) FW4.0
+	to enter AT mode I had to push the button when powering on
+	no quotes around PIN
+	request commands needed to end with ? like AT+VERSION?
+
+	+VERSION:4.0-20190815
+	+NAME:U360
+	+UART:115200,0,0
+	+ROLE:0
+	+CMODE:0
+	+PSWD:1234
+	+ADDR:11:22:0917BF
+	+BIND:9999:88:F97D84
+
+###### validation commands:
+
+	AT+VERSION?
+	AT+NAME?
+	AT+UART?
+	AT+ROLE?
+	AT+CMODE?
+	AT+PSWD?
+	AT+ADDR?
+	AT+BIND?
+
+=== 
+
+AT Commands for HM10 BLE Module connecting to Horus BLE Module
+(Version: HMSoft V533) 
+You can check you version with AT+VERR? or AT+VERS?
+
+Taranis side:
+* Go to hardware menu and enable Bluetooth Telemetry
+* Note the Local address of the BT module 
+
+HM10 Side:
+Connect your BT module to an FTDI USB adapter.
+Open Arduino serial terminal, make sure you baud 
+rate matches the factory settings of the module.
+Type AT and you should get an "OK" back if everything is working
+
+* Make sure the password is 000000
+AT+ PASS000000
+* Set the module to Central Role
+AT+ROLE1
+* Set the baud rate to 115200 
+AT+BAUD4
+* Link the module to your radio by using the local address
+AT+CON4C249837C8F4 (replace numbers with your Mac address)
+
+=== 
