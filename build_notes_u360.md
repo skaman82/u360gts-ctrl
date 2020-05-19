@@ -311,7 +311,7 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 
 ## Troubleshooting
 
-* u360gts-configurator does not connect to tracker via USB
+u360gts-configurator does not connect to tracker via USB
 
 		- MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
 		- disconnect the BT module in the tracker when using USB
