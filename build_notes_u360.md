@@ -313,8 +313,8 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 
 u360gts-configurator does not connect to tracker via USB
 
-		- MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
-		- disconnect the BT module in the tracker when using USB
+	- MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
+	- disconnect the BT module in the tracker when using USB
 
 Simulation mode not working
 
@@ -329,8 +329,8 @@ Tracker "shakes" head / PAN moves when TILT moves
 
 	- due to metall and other interference the mag might reports ocillating data
 	- try to relocate the mag-board to another location
-	 - replace metall with plastics where possible (screw inserts, screws, bearings) 
-	 - add 10K pullup resistors between SDA and 5V, SCL and 5V
+	- replace metall with plastics where possible (screw inserts, screws, bearings) 
+	- add 10K pullup resistors between SDA and 5V, SCL and 5V
 
  
  ### additional Resources:
