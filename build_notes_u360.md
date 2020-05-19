@@ -147,10 +147,10 @@ Connect your radio the the flightcontroller via cable.
 note: Serial Bridge via Cable through de-inverter needs GND.
 
 ```
-  Radio			 _______________	   FC
-  GND			| 				| 	-> GND
-  VCC	-> 		|  de-inverter	| 	-> n/a
-  SIG			|_______________| 	-> RX on FC
+	Radio		 _______________		FC
+	GND			|				| 	->	GND
+	VCC	->		|  de-inverter	| 	->	n/a
+	SIG			|_______________| 	->	RX on FC
 ```
 
 Set the OpenTX Serial Port to "Telem Mirror" in the Hardware page of your radio settings. Choose CROSSFIRE protocol with baudrate 115200 on the u360gts.
