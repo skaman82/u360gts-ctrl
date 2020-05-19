@@ -25,11 +25,15 @@ Bottom left nut holder might needs a trim to ensure clearance to the 9pin header
 
 Place nuts early and fix with some glue.
 
-Two versions of the slipring are currently supported. 23mm (AliExpress) and 26mm long (Sparkfun ROB-13065). Choose your "Bearing\_upper\_insert" STL accordingly.
-
 The gears should not sit on each other and tilt the head to the side if correctly assembled.
 
 #### Assembly head
+
+Two versions of the slipring are currently supported. 23mm (AliExpress) and 26mm long (Sparkfun ROB-13065). Choose your "Bearing\_upper\_insert" STL accordingly.
+
+Cut down the two little spars on the tilt servo so it seats flush on the wall
+
+![Servo spars](images/HEAD_SERVO.jpg)
 
 Solder the IO board to the slipring from "behind" for easier cable routing
 
@@ -37,9 +41,7 @@ Solder the IO board to the slipring from "behind" for easier cable routing
 
 Make sure all components (BT Module, RX Board etc.) are well isolated on the back to not create a short when closing the lid
 
-Cut down the two little spars on the tilt servo so it seats flush on the wall
 
-![Servo spars](images/HEAD_SERVO.jpg)
 
 
 
