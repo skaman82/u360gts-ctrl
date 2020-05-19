@@ -147,8 +147,8 @@ Connect your radio the the flightcontroller via cable.
 note: Serial Bridge via Cable through de-inverter needs GND.
 
 ```
-	Radio		 _______________		FC
-	GND			|				| 	->	GND
+	Radio		 	 _______________		FC
+	GND			|		| 	->	GND
 	VCC	->		|  de-inverter	| 	->	n/a
 	SIG			|_______________| 	->	RX on FC
 ```
@@ -232,7 +232,7 @@ You can check you version with AT+VERR? or AT+VERS?
 
 Taranis side:
 * Go to hardware menu and enable Bluetooth Telemetry
-* Note the Local address of the BT module  (from your radio screen)
+* Note the Local address of the BT module (from your radio screen)
 
 HM10 Side:
 Connect your BT module to an FTDI USB adapter.
