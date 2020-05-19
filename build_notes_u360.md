@@ -227,14 +227,14 @@ colon (:) must be entered as comma (,)
 === 
 
 ##### How to bin a HM10 BLE Module connecting to Horus build-in BLE Module
-(Version: HMSoft V533 or V610)
+(Version: HMSoft V533 or V610)<br>
 You can check you version with AT+VERR? or AT+VERS?
 
 Taranis side:
 * Go to hardware menu and enable Bluetooth Telemetry
 * Note the Local address of the BT module (from your radio screen)
 
-HM10 Side:
+HM10 Side:<br>
 Connect your BT module to an FTDI USB adapter.
 Open Arduino serial terminal, make sure you baud 
 rate matches the factory settings of the module.
