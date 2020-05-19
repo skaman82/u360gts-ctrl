@@ -143,6 +143,10 @@ This also works straight directly from Arduino IDE (klick upload, then short res
 
 
 ## Telemetry setup
+
+Remark: Telemetry input doesn't work with R9M ACCESS at this time. <br>
+In this example I am using Crossfire. CRSF RX connected to an FC UART and serial RX is set to CRSF.
+
 #### A simple telementy test (CROSSFIRE/X9D/WIRE)
 Connect your radio the the flightcontroller via cable.
 
@@ -165,9 +169,6 @@ You should receive coordinates of the plane in the tracker now.
 
 ===
 #### Bluetooth setup
-
-Remark: Telemetry input doesn't work with R9M ACCESS at this time. <br>
-In this example I am using Crossfire. CRSF RX connected to an FC UART and serial RX is set to CRSF.
 
 Connect your BT module to an FTDI USB adapter.
 Open Arduino serial terminal, make sure you baud 
