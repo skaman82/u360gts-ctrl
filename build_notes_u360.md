@@ -297,8 +297,8 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 
   - enable Tilt easing for soft start/stop
   - enable EPS to allow the tacker to *lead* the aircraft while moving
-   - todo: explain and recommend a mode + settings here
-  - enable auto-update-home position #fixme: correct option name here
+  - todo: explain and recommend a mode + settings here #FIXME
+  - enable auto-update-home position #FIXME: correct option name here
 
   
 ## Operation when flying
@@ -309,7 +309,7 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
   - video from tracker gets received on google
 - wait for telemetry from aircraft and set HOME-POSITION when you got a 3D GPS fix (if not set to auto)
 - launch aircraft
-**todo :)**
+**todo :)** #FIXME
 
 
 ## Troubleshooting
@@ -317,13 +317,13 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 u360gts-configurator does not connect to tracker via USB
 
 	- MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
-	- disconnect the BT module in the tracker when using USB
+	- disconnect the BT module in the tracker when using USB if you have problems
 
 Simulation mode not working
 
 	- connect your tracker to power and USB to your computer
 	- choose MAVLINK, bautrate 115200 in the u360
-	- home position?! set auto in GUI?
+	- home position?! set auto in GUI? (#FIXME)
 	- enable simulation mode, then connect to your tty/COM of the FC
 	- choose MAVLINK in the UI, enter near by coordinates and some height
 	- hit "start simulation"
