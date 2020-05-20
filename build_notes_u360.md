@@ -71,14 +71,16 @@ Cut down the two little spars on the tilt servo so it seats flush on the wall
 
 ![Servo spars](images/HEAD_SERVO.jpg)
 
+
 Solder the IO board to the slipring from "behind" for easier cable routing
 
 ![IO board](images/HEAD_IOBOARD.jpg)
 
 Make sure all components (BT Module, RX Board etc.) are well isolated on the back to not create a short when closing the lid
 
+Before mounting the servo-disc and the tracker arm, ensure the tilt servo is at 0° deg. If you dont own a servotester, connect to the GUI and move the servo using the slider. 
 
-
+Once the arm is mounted, validate and adjust the tilt endpoints.
 
 
 
