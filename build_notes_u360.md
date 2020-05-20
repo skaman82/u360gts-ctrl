@@ -39,6 +39,8 @@
 ## u360gts Mini
 #### Printing
 
+Print files, PCBs and a complete bill of materials can be found here: https://www.thingiverse.com/thing:4108944
+
 All parts are designed to be printed without supports (only supports touching build plate on some parts).
 
 If your parts suffer from an elephant foot, decrease first layer flow, temperature, horizontal expansion and/or walls. Gear parts might not fit!
