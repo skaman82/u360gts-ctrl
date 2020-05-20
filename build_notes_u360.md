@@ -1,6 +1,40 @@
 # u360gts *(mini build notes)*
 
-### General build tips and notes
+### Features
+
+- DIY antenna tracker based on u360gts by Raul Ortega  [https://github.com/raul-ortega/u360gts/](https://github.com/raul-ortega/u360gts/)
+- compact design, only 75x75x100cm
+- custom PCBs to simplify wiring
+- modular tripod mounts
+- supports 2-4S, XT60 connector
+- 3.5mm analog Video-Out (Fatshark compatible)
+- 6-Pin JST-SH breakout port (SW/RX/TX/5V/GND/VIDEO) to support:
+  - telemetry relay to GS/tablet
+  - connect external VTX
+  - OpenLog via softserial
+  - Bluetooth Module to configure u360gts
+  - ...through 3 configurable pins(SW/RX/TX)
+- 6-Pin JST-XH AV IO port (VIDEO/AUD_L/AUD_R/GND/VCC/GND) to connect an external RX-Module (i.e. FR632)
+- intergrated Fatshark Module Bay on the head
+- Telemetry input via Bluetooth or FSK-Modem, select via switch on head
+- advanced controlling through u360gts-ctrl:
+ - Turn ON/OFF the VTX
+ - SmartAudio channel control
+ - Battery monitoring
+ - Manually control PAN (to access screws for example)
+ - Infrared supported autonomous parking mode to align tracker
+
+
+##### u360gts-ctrl
+
+- manual PAN control via u360gts-ctl (to access the screws for example)
+- Infrared supported Auto-Home position
+
+
+
+
+
+## General build tips and notes
 
 ## u360gts Mini
 #### Printing
@@ -150,7 +184,7 @@ In this example I am using Crossfire. CRSF RX connected to an FC UART and serial
 #### A simple telementy test (CROSSFIRE/X9D/WIRE)
 Connect your radio the the flightcontroller via cable.
 
-note: Serial Bridge via Cable through de-inverter needs GND.
+note: Serial Bridge via Cable through de-inverter ([https://oshpark.com/shared_projects/V3HPfIeN](https://oshpark.com/shared_projects/V3HPfIeN)) needs GND.
 
 ```
 	Radio		 	 _______________		FC
@@ -336,7 +370,7 @@ Tracker "shakes" head / PAN moves when TILT moves
 	- add 10K pullup resistors between SDA and 5V, SCL and 5V
 
  
- ### additional Resources:
+### additional Resources:
  
   - [https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-quick-start-guide.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-quick-start-guide.md)
- 
+  - [PCB to de-invert Taranis Telemetry for Bluetooth](https://oshpark.com/shared_projects/V3HPfIeN)
