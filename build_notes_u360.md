@@ -23,6 +23,7 @@
  - Battery monitoring
  - Manually control PAN (to access screws for example)
  - Infrared supported autonomous parking mode to align tracker
+ - Bluetooth state-LED visible from outside
 
 
 ##### u360gts-ctrl
@@ -81,6 +82,8 @@ Make sure all components (BT Module, RX Board etc.) are well isolated on the bac
 Before mounting the servo-disc and the tracker arm, ensure the tilt servo is at 0° deg. If you dont own a servotester, connect to the GUI and move the servo using the slider. 
 
 Once the arm is mounted, validate and adjust the tilt endpoints.
+
+Note, the STATE Pin on the RX Board of the lid gets connected to the STATE Pin of your Bluetooth module and will switch on when connected.
 
 
 
