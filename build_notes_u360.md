@@ -305,7 +305,7 @@ Type AT and you should get an "OK" back if everything is working
 	* change baudrate to 115200
 	AT+B115200
 	* Set the PowerMode FU3
-	AT+FU1 
+	AT+FU3 
 	* Change power level to +11dBm (25mw) - optional
 	AT+P5
 	* Check your settings
