@@ -184,7 +184,7 @@ This also works straight directly from Arduino IDE (klick upload, then short res
 ## GPS setup
 
 #### Aircraft
-Make sure your GPS Module hat an update rate at least of 5 Hz
+Make sure your GPS Module has an update rate at least of 5 Hz
 
 #### Tracker
 Configure your Tracker GPS module as described here:
