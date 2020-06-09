@@ -218,6 +218,7 @@ Type AT and you should get an "OK" back if everything is working
 
 The BT module might behave differently based on revision and firmware.
 
+If you are using 2.4 videolink, bluetooth my interfere with your video signal - HC-12 may be a valid alterative as it is working on 433 MHz - it also has a better range (see below) 
 
 ##### How to bind a HC-05 FW 3.0 with a HC-05 FW 4.0
 
@@ -293,6 +294,25 @@ Type AT and you should get an "OK" back if everything is working
 	* Link the module to your radio by using the local address
 	AT+CON4C249837C8F4 (replace numbers with your Mac address)
 
+
+#### HC-12 (433MHz) Setup (HC-12_V2.3)
+
+Connect your HC-12 module to an FTDI USB adapter (ground the SET pin).
+Open Arduino serial terminal, make sure you baud 
+rate matches the factory settings of the module.
+Type AT and you should get an "OK" back if everything is working
+
+	* change baudrate to 115200
+	AT+B115200
+	* Set the PowerMode FU3
+	AT+FU1 
+	* Change power level to +11dBm (25mw) - optional
+	AT+P5
+	* Check your settings
+	AT+RX
+
+Remove ground from the SET pin. Configure the second module the same way.
+
 ## Software setup
 
 1) connect via CLI and type "status", check for MAG="HMC5883"
@@ -323,7 +343,7 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
   - if your antenna does not point North now, adjust **offset** accordingly
   - it should try to point North if all works correctly now
   - fyi: offset-trim can be set while flying via the buttons when the aircraft is above min distance/altitude limits
-  - todo: explain/validate align_mag / offset / offset-trim (marc?)
+  - todo: explain/validate align_mag / offset / offset-trim #FIXME
  
 4) run calibrate PAN again
 
@@ -341,6 +361,15 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
   - todo: explain and recommend a mode + settings here #FIXME
   - enable auto-update-home position #FIXME: correct option name here
 
+7) validate magnetometer / compass:
+
+ - connect the tracker to the configurator
+ - ensure the head is pointing north
+ - align the body of the tracker to the head
+ - now enter 90/180/270 degree on the slider for PAN servo
+ - validate if the outside walls align in each position
+  - if they do: lucky man
+  - if they dont: calibrate mag, realign/improve mag position and/or add 10K pullup resistors between SDA and 5V, SCL and 5V
   
 ## Operation when flying
 
@@ -355,26 +384,26 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 
 ## Troubleshooting
 
-u360gts-configurator does not connect to tracker via USB
+##### u360gts-configurator does not connect to tracker via USB #####
 
-	- MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
-	- disconnect the BT module in the tracker when using USB if you have problems
+ - MSP baudrate is defined by the telemetry baudrate, choose 115200 via the buttons to match the COM/tty baudrate in the GUI
+ - disconnect the BT module in the tracker when using USB if you have problems
 
-Simulation mode not working
+##### Simulation mode not working #####
 
-	- connect your tracker to power and USB to your computer
-	- choose MAVLINK, bautrate 115200 in the u360
-	- home position?! set auto in GUI? (#FIXME)
-	- enable simulation mode, then connect to your tty/COM of the FC
-	- choose MAVLINK in the UI, enter near by coordinates and some height
-	- hit "start simulation"
+ - connect your tracker to power and USB to your computer
+ - choose MAVLINK, bautrate 115200 in the u360
+ - home position?! set auto in GUI? (#FIXME)
+ - enable simulation mode, then connect to your tty/COM of the FC
+ - choose MAVLINK in the UI, enter near by coordinates and some height
+ - hit "start simulation"
     
-Tracker "shakes" head / PAN moves when TILT moves
+##### Tracker "shakes" head / PAN moves when TILT moves #####
 
-	- due to metall and other interference the mag might reports ocillating data
-	- try to relocate the mag-board to another location
-	- replace metall with plastics where possible (screw inserts, screws, bearings) 
-	- add 10K pullup resistors between SDA and 5V, SCL and 5V
+ - due to metall and other interference the mag might reports  ocillating data
+ - try to relocate the mag-board to another location
+ - replace metall with plastics where possible (screw inserts, screws, bearings) 
+ - add 10K pullup resistors between SDA and 5V, SCL and 5V
 
  
 ### additional Resources:
