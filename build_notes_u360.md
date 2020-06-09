@@ -209,6 +209,16 @@ Connect a battery on your plane and wait until Sats are found.
 You should receive coordinates of the plane in the tracker now.
 
 ===
+#### GPS setup
+
+##### Aircraft
+Make sure your GPS Module hat an update rate at least of 5 Hz
+
+##### Tracker
+Configure your Tracker GPS module as described here:
+[https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md)
+
+===
 #### Bluetooth setup
 
 Connect your BT module to an FTDI USB adapter.
@@ -308,6 +318,8 @@ Type AT and you should get an "OK" back if everything is working
 	AT+FU3 
 	* Change power level to +11dBm (25mw) - optional
 	AT+P5
+	* Change channel (always three numbers) - optional 
+	AT+C001
 	* Check your settings
 	AT+RX
 
