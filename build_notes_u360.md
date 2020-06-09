@@ -181,7 +181,16 @@ This also works straight directly from Arduino IDE (klick upload, then short res
 
 ===
 
+## GPS setup
 
+#### Aircraft
+Make sure your GPS Module hat an update rate at least of 5 Hz
+
+#### Tracker
+Configure your Tracker GPS module as described here:
+[https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md)
+
+===
 
 ## Telemetry setup
 
@@ -209,16 +218,7 @@ Connect a battery on your plane and wait until Sats are found.
 You should receive coordinates of the plane in the tracker now.
 
 ===
-#### GPS setup
 
-##### Aircraft
-Make sure your GPS Module hat an update rate at least of 5 Hz
-
-##### Tracker
-Configure your Tracker GPS module as described here:
-[https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md)
-
-===
 #### Bluetooth setup
 
 Connect your BT module to an FTDI USB adapter.
