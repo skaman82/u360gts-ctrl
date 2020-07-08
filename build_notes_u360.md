@@ -196,6 +196,7 @@ Configure your Tracker GPS module as described here:
 
 Remark: Telemetry input doesn't work with R9M ACCESS at this time. <br>
 In this example I am using Crossfire. CRSF RX connected to an FC UART and serial RX is set to CRSF.
+NOTE: CRSF telemetry is transfering a large amount of data. Because of that the BT link might be unstable. 
 
 #### A simple telementy test (CROSSFIRE/X9D/WIRE)
 Connect your radio the the flightcontroller via cable.
