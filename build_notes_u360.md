@@ -48,7 +48,7 @@ If your parts suffer from an elephant foot, decrease first layer flow, temperatu
 
 #### Assembly PCBs
 
-solder the buzzer to the side of the PCB and not as shown on the PCB itself to ensure clearance.
+UPDATE: Do NOT solder the buzzer to the PCB as as it can cause mag interference at this position. Place the buzzer somwhere at the bottom and wire it to the pads.
 
 Isolate the back of the 128x64 display and remove the plastics on the pin headers for correct fit.
 
