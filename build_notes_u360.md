@@ -191,6 +191,7 @@ Configure your Tracker GPS module as described here:
 [https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md)
 
 If you have a GPS installed and activated, you can set the "Minimun Number of Satellites" (8 is better) in the Configuratior for the home lock. The tracker will automatically determine home position after the set min sat count is reached. The "Continuous Home Update" setting is only usefull if you expecting to move the tracker mid flight.
+
 ===
 
 ## Telemetry setup
