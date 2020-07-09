@@ -376,7 +376,7 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
   - decide how the tracke will get its home position: 
   You can set it manually with the push of the button when the aircraft has a GPS lock and is right in front of the tracker (default setting). The tracker will capture the position of the aircraft as its hime position. You can also let the tracker do this automatically if you select (Set Home: Auto, from telemetry) and set the "Minimum number of satellites" (8 is okay).
 
-** 7) CRITICAL for operation: validate magnetometer/compass: **
+7) <strong>CRITICAL for operation:</strong> validate magnetometer/compass:
 
  - mount the tracker on a tripod, far away from everything that could cause magnetic interference and mout everything on it that will be mounted later while flying 
  - connect the tracker to the configurator
