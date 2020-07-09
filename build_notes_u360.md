@@ -190,6 +190,7 @@ Make sure your GPS Module has an update rate at least of 5 Hz
 Configure your Tracker GPS module as described here:
 [https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md](https://github.com/raul-ortega/u360gts/blob/master/wiki/configuration-gps.md)
 
+If you have a GPS installed and activated, you can set the "Minimun Number of Satellites" (8 is better) in the Configuratior for the home lock. The tracker will automatically determine home position after the set min sat count is reached. The "Continuous Home Update" setting is only usefull if you expecting to move the tracker mid flight.
 ===
 
 ## Telemetry setup
@@ -353,10 +354,10 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
     - depending on the result, set align_mag
     - save, reboot, re-calibrate
     - repeat until it directs North, OLED "H:" should be around 360/0
-  - if your antenna does not point North now, adjust **offset** accordingly
+  - if your antenna does not point North now, adjust **offset** accordingly if the offset is less than 90 deg.
+  - use align_mag CLI command if the tracker is not pointing north (following commands work: DEFAULT "CW0 CW90 CW180 CW270 CW0FLIP CW90FLIP CW180FLIP CW270FLIP"
   - it should try to point North if all works correctly now
   - fyi: offset-trim can be set while flying via the buttons when the aircraft is above min distance/altitude limits
-  - todo: explain/validate align_mag / offset / offset-trim #FIXME
  
 4) run calibrate PAN again
 
@@ -370,19 +371,20 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 6) recommended features:
 
   - enable Tilt easing for soft start/stop
-  - enable EPS to allow the tacker to *lead* the aircraft while moving
-  - todo: explain and recommend a mode + settings here #FIXME
-  - enable auto-update-home position #FIXME: correct option name here
+  - enable EPS to allow the tacker to *lead* the aircraft while moving (only usefull if telemetry update rate is very low)
+  - decide how the tracke will get its home position: 
+  You can set it manually with the push of the button when the aircraft has a GPS lock and is right in front of the tracker (default setting). The tracker will capture the position of the aircraft as its hime position. You can also let the tracker do this automatically if you select (Set Home: Auto, from telemetry) and set the "Minimum number of satellites" (8 is okay).
 
-7) validate magnetometer / compass:
+** 7) CRITICAL for operation: validate magnetometer/compass: **
 
+ - mount the tracker on a tripod, far away from everything that could cause magnetic interference and mout everything on it that will be mounted later while flying 
  - connect the tracker to the configurator
- - ensure the head is pointing north
+ - ensure the head is pointing north while connected to configurator
  - align the body of the tracker to the head
- - now enter 90/180/270 degree on the slider for PAN servo
+ - now enter 90/180/270 degree on the right side of the slider for PAN servo
  - validate if the outside walls align in each position
-  - if they do: lucky man
-  - if they dont: calibrate mag, realign/improve mag position and/or add 10K pullup resistors between SDA and 5V, SCL and 5V
+  - if they do: lucky man, you good to go
+  - if they dont: calibrate mag, realign/improve mag position and/or add 10K pullup resistors between SDA and 5V, SCL and 5V, elevate the mag on a larger tower (three sizes on thingiverse) until the outside walls align at 0/90/180/270 deg.
   
 ## Operation when flying
 
@@ -390,9 +392,9 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 - ensure video relay works
   - video from aircraft get received on tracker
   - video from tracker gets received on google
-- wait for telemetry from aircraft and set HOME-POSITION when you got a 3D GPS fix (if not set to auto)
+- wait for telemetry from aircraft and set HOME-POSITION when you got a 3D GPS fix (if not set to auto or it is done by the internal GPS)
 - launch aircraft
-**todo :)** #FIXME
+- while in tracking mode you can use both buttons to correct the tracking by setting a negative or positive tracking offset.
 
 
 ## Troubleshooting
@@ -406,7 +408,6 @@ Cycle Time: 1005, I2C Errors: 1, config size: 1928
 
  - connect your tracker to power and USB to your computer
  - choose MAVLINK, bautrate 115200 in the u360
- - home position?! set auto in GUI? (#FIXME)
  - enable simulation mode, then connect to your tty/COM of the FC
  - choose MAVLINK in the UI, enter near by coordinates and some height
  - hit "start simulation"
