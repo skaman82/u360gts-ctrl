@@ -16,10 +16,10 @@ U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_NONE);  // I2C / TWI
 
 // USER SETTINGS START >>
 
-#define Voltagedetect   3.5    // Min. voltage for cell detection 
-#define voltage_scale   3.70 //Play with this number to adjust voltage scale
+#define voltage_scale   3.70  //play with this number to adjust voltage scale
 #define idle_servo      1500  //center value for the pan servo in us
-#define ir_stop_value   41 //value limit of the IR sensor for parking
+#define ir_stop_value   41    //value limit of the IR sensor for parking
+#define SERVO_MG995           //select servo type accoringly: SERVO_SPT or SERVO_MG995 
 
 // >> USER SETTINGS END 
 
@@ -821,12 +821,23 @@ void manctrl_screen(void) {
 
       if (digitalRead(bt_le) != 1) {
         //move left
-        myservo.writeMicroseconds(1600);
+        #ifdef SERVO_SPT
+        myservo.writeMicroseconds(idle_servo + 100);
+        #endif
+        #ifdef SERVO_MG995
+        myservo.writeMicroseconds(idle_servo + 40);
+        #endif
+        
       }
 
       else if (digitalRead(bt_ri) != 1) {
         //move right
-        myservo.writeMicroseconds(1400);
+        #ifdef SERVO_SPT
+        myservo.writeMicroseconds(idle_servo - 100);
+        #endif
+        #ifdef SERVO_MG995
+        myservo.writeMicroseconds(idle_servo - 40);
+        #endif
       }
       else {
         myservo.writeMicroseconds(idle_servo);
@@ -997,16 +1008,17 @@ void ReadVoltage(void) {
 
     if (celldetect == 0) {
       //detect cell count
-      if (voltage > (Voltagedetect * 5.0)) {
+      
+      if (voltage > 17.1) {
         celldetect = 5;
       }
-      else if (voltage > (Voltagedetect * 4.0)) {
+      else if ((voltage <= 17.1) && (voltage > 12.8)) {
         celldetect = 4;
       }
-      else if (voltage > (Voltagedetect * 3.0)) {
+      else if ((voltage <= 12.8) && (voltage > 8.8)) {
         celldetect = 3;
       }
-      else if (voltage > (Voltagedetect * 2.0)) {
+      else if ((voltage <= 8.8) && (voltage > 5.5)) {
         celldetect = 2;
       }
       else {
@@ -1357,7 +1369,12 @@ void parking_ctrl(void) {
     //Serial.println(ir_value);
 
     if (ir_value > ir_stop_value) {
-      myservo.writeMicroseconds(1600);
+      #ifdef SERVO_SPT
+        myservo.writeMicroseconds(idle_servo + 100);
+        #endif
+        #ifdef SERVO_MG995
+        myservo.writeMicroseconds(idle_servo + 25);
+        #endif
     }
     else {
       myservo.writeMicroseconds(idle_servo);
