@@ -105,6 +105,8 @@ RX/TX/SW on the Power PCB are currently not used. You can use those pads to rout
 
 Solder the wires of the OLED PCB to the slipring directing to the top of the PCB in a slight bow.
 
+You can use some hot glue to fix the slipring wires to the pcb as the are fragile and they break easily at the solder joints 
+
 ![OLED to slipring](images/OLED_SLIPRING.jpg)
 ![BODY](images/BODY_OPEN.jpg)
 
